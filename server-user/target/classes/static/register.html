@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        function getCode() {
+            var email = $("#email").val();
+            if (undefined == email || "" == email) {
+                alert("请填写邮箱")
+                return
+            }
+
+            $("#btn").attr("disabled", "disabled");
+            setTimeout(function () {
+                btn.disabled = '';
+            }, 60 * 1000);//60秒后才能点击
+
+            $.ajax({
+                url: "/api/code/getCode/" + email,    //请求的url地址
+                type: "GET",   //请求方式
+                success: function (req) {
+                    if (req) {
+                        alert("操作成功");
+                    } else {
+                        alert("操作失败");
+                    }
+                },
+                error: function () {
+                    alert("操作异常");
+                }
+            });
+        }
+
+        function register() {
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var ConfirmPassword = $("#ConfirmPassword").val();
+            var code = $("#code").val();
+
+            if (undefined == email || "" == email ||
+                undefined == password || "" == password ||
+                undefined == ConfirmPassword || "" == ConfirmPassword ||
+                undefined == code || "" == code) {
+                alert("请填写信息")
+                return
+            }
+            if (password != ConfirmPassword) {
+                alert("密码不正确")
+                return
+            }
+
+            $.ajax({
+                url: "/api/user/register/" + email + "/" + password + "/" + code,    //请求的url地址
+                type: "GET",   //请求方式
+                success: function (req) {
+                    if ("true" == req) {
+                        window.location.href = 'welcome.html';
+                    } else {
+                        alert("注册失败");
+                    }
+                }, error: function (msg) {
+                    alert("注册异常");
+                }
+            });
+        }
+    </script>
+    <title>注册</title>
+</head>
+<body>
+<form>
+    邮箱：<input id="email" type="text"/>
+    <br/>
+    密码：<input id="password" type="password"/>
+    <br/>
+    确认密码：<input id="ConfirmPassword" type="password"/>
+    <br/>
+    验证码：<input id="code" type="text"/><input type="button" value="获取验证码" id="btn" onclick="getCode()"/>
+    <br/>
+    <button type="button" onclick="register()">注册</button>
+</form>
+<a href="login.html">登录</a>
+</body>
+</html>

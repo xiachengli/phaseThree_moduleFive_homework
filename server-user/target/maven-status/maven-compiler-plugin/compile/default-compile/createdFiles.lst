@@ -1,0 +1,7 @@
+com\xcl\pojo\User.class
+com\xcl\service\UserService.class
+com\xcl\mapper\UserMapper.class
+com\xcl\service\impl\UserServiceImpl.class
+com\xcl\controller\UserController.class
+com\xcl\feign\CodeFeign.class
+com\xcl\UserBootstrap.class

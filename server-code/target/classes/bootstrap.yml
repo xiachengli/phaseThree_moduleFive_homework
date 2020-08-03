@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: server-code
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # nacos config 配置
+      config:
+        server-addr: 127.0.0.1:8848
+        # 锁定server端的配置文件（读取它的配置项）
+        namespace: 74507098-3f1d-4b48-823e-217078b3122e
+        file-extension: yaml   #默认properties
+dubbo:
+  registry:
+    # 挂载到 Spring Cloud 注册中心
+    address: spring-cloud://localhost
+  cloud:
+    # 订阅服务提供方的应用列表，订阅多个服务提供者使用 "," 连接
+    subscribed-services: server-email

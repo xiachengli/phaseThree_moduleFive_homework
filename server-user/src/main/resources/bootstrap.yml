@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: server-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+          # nacos config 配置
+      config:
+          server-addr: 127.0.0.1:8848
+          # 锁定server端的配置文件（读取它的配置项）
+          namespace: 74507098-3f1d-4b48-823e-217078b3122e
+          file-extension: yaml   #默认properties
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

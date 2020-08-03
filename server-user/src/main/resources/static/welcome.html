@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        window.onload = function(){
+            token();
+        }
+        function token() {
+            $.ajax({
+                url: "/api/user/info",    //请求的url地址
+                type: "GET",   //请求方式
+                success: function (req) {
+                    if(""==req){
+                        window.location.replace('login.html')
+                    }
+                    $("#name").text(req+"欢迎登录系统！");
+                },
+                error: function () {
+                    window.location.replace('login.html')
+                }
+            });
+        }
+    </script>
+    <title>欢迎⻚⾯</title>
+</head>
+<body>
+<div id="name">欢迎登录系统！</div>
+</body>
+</html>
